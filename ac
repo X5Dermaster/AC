@@ -23,7 +23,7 @@ local function DetectAdonis()
 end
 
 local function BypassAdonis()
-    for , thread in AdonisAnticheatThreads do
+    for _, thread in AdonisAnticheatThreads do
         pcall(coroutine.close, thread)
     end
     -- print("!Adonis - Killed", #AdonisAnticheatThreads, "threads")
@@ -34,14 +34,14 @@ local function BypassAdonis()
             Keys = { "Detected", "RLocked" }
         }, false)
 
-        for , AdonisTable in ContendorAdonisTables do
+        for _, AdonisTable in ContendorAdonisTables do
             if typeof(rawget(AdonisTable, "Detected")) ~= "function" then
                 continue
             end
             table.insert(AdonisTables, AdonisTable)
         end
     else
-        for , Table in getgc(true) do
+        for _, Table in getgc(true) do
             if typeof(Table) ~= "table" then
                 continue
             end
@@ -57,8 +57,8 @@ local function BypassAdonis()
     -- print("!Adonis - Found", #AdonisTables, "tables")
 
     local HookedCount = 0
-    for , AdonisTable in AdonisTables do
-        for , DetectionFunc in AdonisTable do
+    for _, AdonisTable in AdonisTables do
+        for _, DetectionFunc in AdonisTable do
             if typeof(DetectionFunc) ~= "function" or isfunctionhooked(DetectionFunc) then
                 continue
             end
@@ -80,8 +80,8 @@ if DetectAdonis() then
     if success then
         -- print("!Adonis - bypassed")
     else
-        -- warn("!Adonis - Failed bypass")
+        warn("!Adonis - Failed bypass")
     end
 else
-    print("!Adonis - not detected")
+    -- print("!Adonis - not detected")
 end
